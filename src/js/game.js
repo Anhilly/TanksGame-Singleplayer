@@ -3,6 +3,7 @@ import InputHandler from '/src/js/input.js';
 import Player from '/src/js/tanks/Player.js';
 import Block from '/src/js/block.js'
 import {buildLevel, level1} from "/src/js/levels.js"
+import Bullet from '/src/js/bullet.js';
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -16,19 +17,24 @@ export default class Game {
         this.gameHeight = gameHeight;
         this.gameWidth = gameWidth;
         this.GAMESTATE = GAMESTATE;
+        this.gameObjects = [];
     }
 
     start() {
         this.GAMESTATE = GAMESTATE.RUNNING;
         this.player = new Player(this);
         new InputHandler(this.player, this);
+        let blocks = buildLevel(this, level1);
+        this.gameObjects.push(this.player);
+        this.gameObjects.push(...blocks);
+    }
 
-        let bricks = buildLevel(this, level1);
-        this.gameObjects = [
-            this.player,
-            ...bricks
-        ];
-        
+    getGameObjects(){
+        return this.gameObjects;
+    }
+
+    addGameObjects(obj){
+        this.gameObjects.push(obj);
     }
 
     //Draws all objects
@@ -38,6 +44,7 @@ export default class Game {
     }
 
     update(deltaTime){
+        
         this.gameObjects.forEach(object => object.update(deltaTime));
     }
 }

@@ -1,4 +1,5 @@
 import Tank from '/src/js/tanks/Tank.js'
+import Bullet from '/src/js/bullet.js'
 
 export default class Player extends Tank {
     constructor(game) {
@@ -24,6 +25,7 @@ export default class Player extends Tank {
             this.tank.width = hOld;
         }
         this.tank.x += this.tank.speed;
+        console.log(this.game.getGameObjects())
     }
 
 
@@ -46,7 +48,8 @@ export default class Player extends Tank {
         this.tank.x -= this.tank.speed;
     }
 
-
-
+    shoot(){
+        this.game.addGameObjects(new Bullet(this.game, this));
+    }
 
 }

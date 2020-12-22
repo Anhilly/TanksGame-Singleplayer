@@ -21,20 +21,20 @@ export default class Tank{
         this.game = game;
     }
 
+
     draw(ctx){
         //To calculate the canon depending on where the tank is
-        this.canon.x = this.tank.x + this.tank.width  - (this.tank.width / 2);
-        this.canon.y = this.tank.y + this.tank.height - (this.tank.height / 2) - 10 / 2;
         
         //Drawing tank and Canon
         ctx.strokeStyle = 'blue';
         ctx.strokeRect(this.tank.x, this.tank.y, this.tank.width, this.tank.height);
         ctx.strokeRect(this.canon.x, this.canon.y, this.canon.width, this.canon.height);
-
     }
 
     update(deltaTime){
         if(!deltaTime) return;
+        this.canon.x = this.tank.x + this.tank.width  - (this.tank.width / 2);
+        this.canon.y = this.tank.y + this.tank.height - (this.tank.height / 2) - 10 / 2;
     }
 }
 /*

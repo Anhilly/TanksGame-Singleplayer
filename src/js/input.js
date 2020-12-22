@@ -19,6 +19,11 @@ export default class InputHandler {
                     Player.moveRight(lastInput);
                     lastInput = event.key;
                     break;
+                case ' ':
+                    Player.shoot();
+                    lastInput = event.key;
+                    break;
+                
             }
         });
     }
