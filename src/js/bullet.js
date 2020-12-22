@@ -5,8 +5,8 @@ export default class Bullet {
         this.width = 10;
         this.height = 10;
         this.position = {
-            x: this.tank.canon.x  + this.tank.canon.width,
-            y: this.tank.canon.y
+            x: this.tank.tank.x + this.width, 
+            y: this.tank.tank.y - this.tank.tank.height / 2 + this.height
         }
         this.speed = { x: 2, y: 2 };
         //Image
@@ -23,7 +23,7 @@ export default class Bullet {
     update(deltaTime) {
         if(!deltaTime) return;
         this.position.x += 2;
-        //wwwwwwwwwwthis.position.y += 2;
+        //this.position.y += 2;
     }
     //Collision detection - Bounce normal 1
 }

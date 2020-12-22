@@ -26,5 +26,12 @@ export default class InputHandler {
                 
             }
         });
+        document.addEventListener('mousemove', mouse => {
+            let mousePosition = {
+                x: mouse.x,
+                y: mouse.y
+            };
+            Player.setMousePosition(mousePosition);
+        });
     }
 }
