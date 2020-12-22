@@ -1,4 +1,6 @@
-import Tank from '/js/tank.js';
+//import Tank from '/js/tanks/tank.js';
+import InputHandler from './input.js';
+import Player from '/js/tanks/Player.js';
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -16,17 +18,17 @@ export default class Game {
 
     start() {
         this.GAMESTATE = GAMESTATE.RUNNING;
-        this.player = new Tank(this);
+        this.player = new Player(this);
+        new InputHandler(this.player, this);
     }
 
     //Draws all objects
     draw(ctx) {     
-        this.player.draw(ctx);
-        
+        this.player.draw(ctx, 'blue');
     }
 
     update(deltaTime){
-        this.player.update(deltaTime);
+        if(!deltaTime) return;
     }
 }
 
