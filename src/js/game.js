@@ -1,6 +1,8 @@
 //import Tank from '/js/tanks/tank.js';
-import InputHandler from './input.js';
-import Player from '/js/tanks/Player.js';
+import InputHandler from '/src/js/input.js';
+import Player from '/src/js/tanks/Player.js';
+import Block from '/src/js/block.js'
+import {buildLevel, level1} from "/src/js/levels.js"
 
 const GAMESTATE = {
     PAUSED: 0,
@@ -20,15 +22,23 @@ export default class Game {
         this.GAMESTATE = GAMESTATE.RUNNING;
         this.player = new Player(this);
         new InputHandler(this.player, this);
+
+        let bricks = buildLevel(this, level1);
+        this.gameObjects = [
+            this.player,
+            ...bricks
+        ];
+        
     }
 
     //Draws all objects
-    draw(ctx) {     
-        this.player.draw(ctx, 'blue');
+    draw(ctx) {
+        this.gameObjects.forEach(object => object.draw(ctx));
+       
     }
 
     update(deltaTime){
-        if(!deltaTime) return;
+        this.gameObjects.forEach(object => object.update(deltaTime));
     }
 }
 

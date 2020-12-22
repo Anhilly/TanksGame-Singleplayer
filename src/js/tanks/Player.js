@@ -1,4 +1,4 @@
-import Tank from '/js/tanks/Tank.js'
+import Tank from '/src/js/tanks/Tank.js'
 
 export default class Player extends Tank {
     constructor(game) {
