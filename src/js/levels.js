@@ -28,7 +28,6 @@ export function buildLevel(game, level){
                     x: 40 * blockIndex,
                     y: 40 * rowIndex
                 };
-
                 blocks.push(new Block(game, position));
             }
         })

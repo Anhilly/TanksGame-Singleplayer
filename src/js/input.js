@@ -19,10 +19,6 @@ export default class InputHandler {
                     Player.moveRight(lastInput);
                     lastInput = event.key;
                     break;
-                case ' ':
-                    Player.shoot();
-                    lastInput = event.key;
-                    break;
                 
             }
         });
@@ -33,5 +29,10 @@ export default class InputHandler {
             };
             Player.setMousePosition(mousePosition);
         });
+
+        document.addEventListener('mousedown', mouse => {
+            Player.setMousePosition({x: mouse.x, y: mouse.y});
+            Player.shoot();
+        })
     }
 }

@@ -37,7 +37,7 @@ export default class Player extends Tank {
     }
 
     shoot() {
-        this.game.addGameObjects(new Bullet(this.game, this));
+        this.game.addGameObjects(new Bullet(this.game, this, {x: this.mousePosition.x, y: this.mousePosition.y}));
     }
 
     rotateTank() {
