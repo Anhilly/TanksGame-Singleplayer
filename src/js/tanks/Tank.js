@@ -10,7 +10,7 @@ export default class Tank{
             height: 61,
             x: game.gameWidth / 5,
             y: game.gameHeight / 2,
-            speed: 2
+            speed: 4
         }
         this.canon = {
             width: 40,

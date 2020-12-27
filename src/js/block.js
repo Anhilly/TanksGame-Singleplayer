@@ -10,12 +10,15 @@ export default class Block{
         this.width = 40;
         this.height = 40;
         this.DESTROYABLE = DESTROYABLE;
+
+        this.image = {};
+        this.image.block = new Image();
+        this.image.block.src = '/assets/block.png';
     }
 
     draw(ctx){
         ctx.strokeStyle = '#827756';
-        ctx.strokeRect(this.position.x, this.position.y, this.width, this.height);
-        ctx.stroke();
+        ctx.drawImage(this.image.block ,this.position.x, this.position.y);
     }
 
     update(deltaTime){

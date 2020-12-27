@@ -44,7 +44,6 @@ export default class Game {
     }
 
     update(deltaTime){
-        
         this.gameObjects.forEach(object => object.update(deltaTime));
     }
 }
