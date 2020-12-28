@@ -21,7 +21,7 @@ export default class Bullet {
             down: this.position.y + this.height,
         }
 
-        
+
         //Image
         this.image = {};
         this.image.bulletDefault = new Image();
@@ -31,7 +31,7 @@ export default class Bullet {
         //Calculations
         this.dx = this.position.x - this.mouse.x;
         this.dy = this.position.y - this.mouse.y;
-        
+
         //Normierte Vektoren
         this.vx = this.dx / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
         this.vy = this.dy / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
@@ -59,26 +59,32 @@ export default class Bullet {
             return;
         }
 
-        /*
+
 
         this.game.gameObjects.forEach(element => {
             if (element instanceof Block) {
                 if ((Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2))) >= 50) {
                     return;
                 }
+
                 //Hit oben block
-                if (this.position.x >= element.position.x && this.position.x <= element.position.x + element.width) {
-                    if (this.position.y + this.height == element.position.y) {
-                        console.log("Hit block oben");
-                        this.dy = -this.dy;
-                    } 
+                if (this.position.x >= element.position.x && this.position.x <= element.position.x + element.width
+                    && this.position.y + this.height >= element.position.y && this.position.y <= element.position.y) {
+                    this.vy = -this.vy;
+                    console.log("hit oben block");
+                } else if (this.position.x >= element.position.x && this.position.x <= element.position.x + element.width
+                    && this.position.y + this.height >= element.position.y + element.height && this.position.y <= element.position.y + element.height) {
+                    this.vy = -this.vy;
+                    console.log("hit unten block");
+                } else if (this.position.x >= element.position.x + this.width && this.position.x + this.width <= element.position.x + this.width
+                    && this.position.y <= element.position.y && this.position.y <= element.position.y + element.width) {
+                    this.vx = -this.vx;
+                    console.log("Rechts block");
                 }
-
-
             }
 
 
-        }); */
+        });
 
         //if(this.position.x < this.game.gameWidth && this.position.y < this.game.gameHeight && this.position.x > 0 && this.position.y > 0){
         this.position.x = this.position.x - this.vx * this.speed;
