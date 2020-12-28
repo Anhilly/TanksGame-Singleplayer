@@ -7,6 +7,7 @@ export default class Bullet {
         this.mouse = mouse;
         this.width = 10;
         this.height = 10;
+        this.speed = 4;
         //Position
         this.position = {
             x: this.tank.tank.x + this.tank.tank.width / 2,
@@ -20,7 +21,7 @@ export default class Bullet {
             down: this.position.y + this.height,
         }
 
-        this.speed = { x: 2, y: 2 };
+        
         //Image
         this.image = {};
         this.image.bulletDefault = new Image();
@@ -30,6 +31,10 @@ export default class Bullet {
         //Calculations
         this.dx = this.position.x - this.mouse.x;
         this.dy = this.position.y - this.mouse.y;
+        
+        //Normierte Vektoren
+        this.vx = this.dx / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
+        this.vy = this.dy / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
     }
 
     draw(ctx) {
@@ -54,6 +59,7 @@ export default class Bullet {
             return;
         }
 
+        /*
 
         this.game.gameObjects.forEach(element => {
             if (element instanceof Block) {
@@ -72,11 +78,11 @@ export default class Bullet {
             }
 
 
-        });
+        }); */
 
         //if(this.position.x < this.game.gameWidth && this.position.y < this.game.gameHeight && this.position.x > 0 && this.position.y > 0){
-        this.position.x = Math.floor(this.position.x - this.dx / 30);
-        this.position.y = Math.floor(this.position.y - this.dy / 30);
+        this.position.x = this.position.x - this.vx * this.speed;
+        this.position.y = this.position.y - this.vy * this.speed;
 
 
         //this.position.x += 2;
