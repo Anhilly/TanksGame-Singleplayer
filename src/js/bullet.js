@@ -102,11 +102,9 @@ export default class Bullet {
 	}
 
 	deleteBullet() {
-		console.log(this.game.gameObjects);
 		this.game.gameObjects = this.game.gameObjects.filter(
 			(obj) => !(obj instanceof Bullet && obj.position.x == this.position.x && obj.position.y == this.position.y)
 		);
-		console.log(this.game.gameObjects);
 	}
 
 	update(deltaTime) {

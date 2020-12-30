@@ -1,37 +1,61 @@
 export default class InputHandler {
-	constructor(Player, game) {
-		let lastInput = "a";
+	constructor(player, game) {
+		let lastInput = "";
+		/*
+		document.addEventListener("keydown", (event) => {
+			if (event.key == "w" || event.key == "a" || event.key == "s" || event.key == "d") {
+				player.move(event.key, lastInput);
+				lastInput = event.key;
+			}
+        }); */
+		let keyMap = [false, false, false, false];
 		document.addEventListener("keydown", (event) => {
 			switch (event.key) {
 				case "w":
-					Player.moveUp(lastInput);
-					lastInput = event.key;
+					keyMap[0] = true;
 					break;
 				case "a":
-					Player.moveLeft(lastInput);
-					lastInput = event.key;
+					keyMap[1] = true;
 					break;
 				case "s":
-					Player.moveDown(lastInput);
-					lastInput = event.key;
+					keyMap[2] = true;
 					break;
 				case "d":
-					Player.moveRight(lastInput);
-					lastInput = event.key;
+					keyMap[3] = true;
 					break;
 			}
+			player.setKeyMap(keyMap);
 		});
+
+		document.addEventListener("keyup", (event) => {
+			switch (event.key) {
+				case "w":
+					keyMap[0] = false;
+					break;
+				case "a":
+					keyMap[1] = false;
+					break;
+				case "s":
+					keyMap[2] = false;
+					break;
+				case "d":
+					keyMap[3] = false;
+					break;
+			}
+			player.setKeyMap(keyMap);
+		});
+
 		document.addEventListener("mousemove", (mouse) => {
 			let mousePosition = {
 				x: mouse.x,
 				y: mouse.y,
 			};
-			Player.setMousePosition(mousePosition);
+			player.setMousePosition(mousePosition);
 		});
 
 		document.addEventListener("mousedown", (mouse) => {
-			Player.setMousePosition({ x: mouse.x, y: mouse.y });
-			Player.shoot();
+			player.setMousePosition({ x: mouse.x, y: mouse.y });
+			player.shoot();
 		});
 	}
 }

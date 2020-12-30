@@ -10,9 +10,22 @@ export default class Tank {
 			height: 61,
 			x: game.gameWidth / 5,
 			y: game.gameHeight / 2,
-			speed: 4,
+			speed: 1,
 			bounceCounter: 1,
 		};
 		this.game = game;
+	}
+
+	moveUp() {
+		this.tank.y -= this.tank.speed;
+	}
+	moveLeft() {
+		this.tank.x -= this.tank.speed;
+	}
+	moveRight() {
+		this.tank.x += this.tank.speed;
+	}
+	moveDown() {
+		this.tank.y += this.tank.speed;
 	}
 }
