@@ -1,4 +1,4 @@
-import Game from '/src/js/game.js';
+import Game from "/src/js/game.js";
 
 let canvas = document.getElementById("gameScreen");
 let ctx = canvas.getContext("2d");
@@ -11,14 +11,14 @@ game.start();
 
 let lastTime = 0;
 
-function gameLoop(timestamp){
-    ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
-    ctx.beginPath();
-    let deltaTime = timestamp - lastTime;
-    lastTime = timestamp;
-    game.update(deltaTime);
-    game.draw(ctx);
+function gameLoop(timestamp) {
+	ctx.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
+	ctx.beginPath();
+	let deltaTime = timestamp - lastTime;
+	lastTime = timestamp;
+	game.update(deltaTime);
+	game.draw(ctx);
 
-    requestAnimationFrame(gameLoop);
+	requestAnimationFrame(gameLoop);
 }
 gameLoop();
