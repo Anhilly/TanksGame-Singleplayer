@@ -46,7 +46,45 @@ export default class Bullet {
 		ctx.closePath();
 	}
 
-	collisionDetection() {}
+	collisionDetection(element) {
+		if (
+			//Hit oben block
+			this.position.x >= element.position.x &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y
+		) {
+			this.vy = -this.vy;
+			console.log("hit oben block");
+		} else if (
+			//Hit unten block
+			this.position.x >= element.position.x &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y + element.height &&
+			this.position.y <= element.position.y + element.height
+		) {
+			this.vy = -this.vy;
+			console.log("hit unten block");
+		} else if (
+			//Hit left block
+			this.position.x + this.speed >= element.position.x &&
+			this.position.x <= element.position.x &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y + element.width
+		) {
+			this.vx = -this.vx;
+			console.log("Links block");
+		} else if (
+			//Hit right block
+			this.position.x + this.speed >= element.position.x + element.width &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y + element.width
+		) {
+			this.vx = -this.vx;
+			console.log("rechts block");
+		}
+	}
 
 	update(deltaTime) {
 		if (!deltaTime) return;
@@ -57,44 +95,12 @@ export default class Bullet {
 
 		this.game.gameObjects.forEach((element) => {
 			if (element instanceof Block) {
-				if (Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2)) >= 60) {
+				//Calculates distance to elimate most blocks
+				if (Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2)) >= 100) {
 					return;
 				}
 
-				//Hit oben block
-				if (
-					this.position.x >= element.position.x &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y + this.speed >= element.position.y &&
-					this.position.y <= element.position.y
-				) {
-					this.vy = -this.vy;
-					console.log("hit oben block");
-				} else if (
-					this.position.x >= element.position.x &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y + this.speed >= element.position.y + element.height &&
-					this.position.y <= element.position.y + element.height
-				) {
-					this.vy = -this.vy;
-					console.log("hit unten block");
-				} else if (
-					this.position.x + this.speed >= element.position.x &&
-					this.position.x <= element.position.x &&
-					this.position.y >= element.position.y &&
-					this.position.y <= element.position.y + element.width
-				) {
-					this.vx = -this.vx;
-					console.log("Links block");
-				} else if (
-					this.position.x + this.speed >= element.position.x + element.width &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y >= element.position.y &&
-					this.position.y <= element.position.y + element.width
-				) {
-					this.vx = -this.vx;
-					console.log("rechts block");
-				}
+				this.collisionDetection(element);
 			}
 		});
 
