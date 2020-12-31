@@ -14,13 +14,6 @@ export default class Bullet {
 			x: this.tank.tank.x + this.tank.tank.width / 2,
 			y: this.tank.tank.y + this.tank.tank.height / 2,
 		};
-		//Hitbox
-		this.hitbox = {
-			left: this.position.x,
-			up: this.position.y,
-			right: this.position.x + this.width,
-			down: this.position.y + this.height,
-		};
 
 		//Image
 		this.image = {};
