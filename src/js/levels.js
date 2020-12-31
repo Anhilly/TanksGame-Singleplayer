@@ -25,22 +25,31 @@ export function buildLevel(game, level) {
 
 	level.forEach((row, rowIndex) => {
 		row.forEach((map, mapIndex) => {
-			if (map === 1) {
-				let position = {
-					x: 40 * mapIndex,
-					y: 40 * rowIndex,
-				};
-				components.push(new Block(game, position));
-			} else if (map === 2) {
-				components.push(generatePlayer(game));
+			if (map != 0) {
+				let position = calculatePosition(mapIndex, rowIndex);
+				if (map === 1) {
+					components.push(new Block(game, position));
+				} else if (map === 2) {
+					components.push(generatePlayer(game, position));
+				}
 			}
 		});
 	});
 	return components;
 }
 
-function generatePlayer(game) {
+function calculatePosition(mapIndex, rowIndex) {
+	let position = {
+		x: 40 * mapIndex,
+		y: 40 * rowIndex,
+	};
+	return position;
+}
+
+function generatePlayer(game, position) {
 	let player = new Player(game);
+	player.tank.x = position.x;
+	player.tank.y = position.y;
 	new InputHandler(player, game);
 	return player;
 }
