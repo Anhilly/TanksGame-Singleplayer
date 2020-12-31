@@ -8,11 +8,6 @@ export default class Player extends Tank {
 		this.keyMap = [false, false, false, false];
 		this.image.tank.src = "/assets/playerTank_body.png";
 		this.image.canon.src = "/assets/playerTank_head.png";
-		this.canon = {
-			x: this.tank.x + this.tank.width / 2,
-			y: this.tank.y + 35,
-			// this.tank.x + this.tank.width / 2, this.tank.y + 35 rotation point
-		};
 	}
 
 	setKeyMap(keyMap) {
