@@ -1,6 +1,10 @@
+//Tanks
 import Player from "/src/js/tanks/Player.js";
+import NotMovingTank from "/src/js/tanks/NotMovingTank.js";
+
 import Block from "/src/js/block.js";
 import InputHandler from "/src/js/input.js";
+
 //1 = Block, 2 = Player spawn, 3 = NotMovingTank, 4 = MovingTank
 export const level1 = [
 	[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -31,6 +35,8 @@ export function buildLevel(game, level) {
 					components.push(new Block(game, position));
 				} else if (map === 2) {
 					components.push(generatePlayer(game, position));
+				} else if (map === 3) {
+					components.push(generateNotMovingTank(game, position));
 				}
 			}
 		});
@@ -44,6 +50,13 @@ function calculatePosition(mapIndex, rowIndex) {
 		y: 40 * rowIndex,
 	};
 	return position;
+}
+
+function generateNotMovingTank(game, position) {
+	let tank = new NotMovingTank(game);
+	tank.tank.x = position.x;
+	tank.tank.y = position.y;
+	return tank;
 }
 
 function generatePlayer(game, position) {
