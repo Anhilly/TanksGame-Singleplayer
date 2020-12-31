@@ -1,4 +1,7 @@
+import NotMovingTank from "/src/js/tanks/NotMovingTank.js";
+import Player from "/src/js/tanks/Player.js";
 import Block from "/src/js/block.js";
+import Tank from "/src/js/tanks/Tank.js";
 
 export default class Bullet {
 	constructor(game, tank, mouse) {
@@ -42,6 +45,94 @@ export default class Bullet {
 		ctx.restore();
 	}
 
+	collisionDetectionBlock(element) {
+		if (
+			//Hit oben block
+			this.position.x >= element.position.x &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y
+		) {
+			this.vy = -this.vy;
+			this.bounceCounter--;
+			console.log("hit oben block");
+		} else if (
+			//Hit unten block
+			this.position.x >= element.position.x &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y + element.height &&
+			this.position.y <= element.position.y + element.height
+		) {
+			this.vy = -this.vy;
+			this.bounceCounter--;
+			console.log("hit unten block");
+		} else if (
+			//Hit left block
+			this.position.x + this.speed >= element.position.x &&
+			this.position.x <= element.position.x &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y + element.width
+		) {
+			this.vx = -this.vx;
+			this.bounceCounter--;
+			console.log("Links block");
+		} else if (
+			//Hit right block
+			this.position.x + this.speed >= element.position.x + element.width &&
+			this.position.x <= element.position.x + element.width &&
+			this.position.y + this.speed >= element.position.y &&
+			this.position.y <= element.position.y + element.width
+		) {
+			this.vx = -this.vx;
+			this.bounceCounter--;
+			console.log("rechts block");
+		}
+	}
+
+	collisionDetectionTank(element) {
+		if (
+			//Hit oben block
+			this.position.x >= element.tank.x &&
+			this.position.x <= element.tank.x + element.tank.height &&
+			this.position.y + this.speed >= element.tank.y &&
+			this.position.y <= element.tank.y
+		) {
+			this.vy = -this.vy;
+			this.bounceCounter--;
+			console.log("boom");
+		} else if (
+			//Hit unten block
+			this.position.x >= element.tank.x &&
+			this.position.x <= element.tank.x + element.tank.height &&
+			this.position.y + this.speed >= element.tank.y + element.tank.height &&
+			this.position.y <= element.tank.y + element.tank.height
+		) {
+			this.vy = -this.vy;
+			this.bounceCounter--;
+			console.log("boom");
+		} else if (
+			//Hit left block
+			this.position.x + this.speed >= element.tank.x &&
+			this.position.x <= element.tank.x &&
+			this.position.y + this.speed >= element.tank.y &&
+			this.position.y <= element.tank.y + element.tank.height
+		) {
+			this.vx = -this.vx;
+			this.bounceCounter--;
+			console.log("boom");
+		} else if (
+			//Hit right block
+			this.position.x + this.speed >= element.tank.x + element.tank.height &&
+			this.position.x <= element.tank.x + element.tank.height &&
+			this.position.y + this.speed >= element.tank.y &&
+			this.position.y <= element.tank.y + element.tank.height
+		) {
+			this.vx = -this.vx;
+			this.bounceCounter--;
+			console.log("boom");
+		}
+	}
+
 	collisionDetection() {
 		this.game.gameObjects.forEach((element) => {
 			if (element instanceof Block) {
@@ -49,47 +140,9 @@ export default class Bullet {
 				if (Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2)) >= 100) {
 					return;
 				}
-				if (
-					//Hit oben block
-					this.position.x >= element.position.x &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y + this.speed >= element.position.y &&
-					this.position.y <= element.position.y
-				) {
-					this.vy = -this.vy;
-					this.bounceCounter--;
-					console.log("hit oben block");
-				} else if (
-					//Hit unten block
-					this.position.x >= element.position.x &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y + this.speed >= element.position.y + element.height &&
-					this.position.y <= element.position.y + element.height
-				) {
-					this.vy = -this.vy;
-					this.bounceCounter--;
-					console.log("hit unten block");
-				} else if (
-					//Hit left block
-					this.position.x + this.speed >= element.position.x &&
-					this.position.x <= element.position.x &&
-					this.position.y + this.speed >= element.position.y &&
-					this.position.y <= element.position.y + element.width
-				) {
-					this.vx = -this.vx;
-					this.bounceCounter--;
-					console.log("Links block");
-				} else if (
-					//Hit right block
-					this.position.x + this.speed >= element.position.x + element.width &&
-					this.position.x <= element.position.x + element.width &&
-					this.position.y + this.speed >= element.position.y &&
-					this.position.y <= element.position.y + element.width
-				) {
-					this.vx = -this.vx;
-					this.bounceCounter--;
-					console.log("rechts block");
-				}
+				this.collisionDetectionBlock(element);
+			} else if ((element instanceof Player || element instanceof NotMovingTank) && element != this.tank) {
+				this.collisionDetectionTank(element);
 			}
 		});
 	}
