@@ -7,11 +7,7 @@ export default class Player extends Tank {
 		this.mousePosition = { x: 0, y: 0 };
 		this.rotate = 0;
 		this.keyMap = [false, false, false, false];
-
-		this.image = {};
-		this.image.player = new Image();
-		this.image.player.src = "/assets/playerTank_body.png";
-		this.image.canon = new Image();
+		this.image.tank.src = "/assets/playerTank_body.png";
 		this.image.canon.src = "/assets/playerTank_head.png";
 		this.canon = {
 			x: this.tank.x + this.tank.width / 2,
@@ -90,7 +86,7 @@ export default class Player extends Tank {
 
 	draw(ctx) {
 		//Drawing Tank
-		ctx.drawImage(this.image.player, this.tank.x, this.tank.y);
+		ctx.drawImage(this.image.tank, this.tank.x, this.tank.y);
 		this.drawCanon(ctx);
 	}
 

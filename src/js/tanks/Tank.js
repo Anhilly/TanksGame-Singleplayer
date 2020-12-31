@@ -14,6 +14,10 @@ export default class Tank {
 			bounceCounter: 1,
 		};
 		this.game = game;
+
+		this.image = {};
+		this.image.tank = new Image();
+		this.image.canon = new Image();
 	}
 
 	moveUp() {
