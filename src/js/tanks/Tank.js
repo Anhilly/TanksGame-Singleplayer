@@ -13,8 +13,8 @@ export default class Tank {
 			speed: 1,
 			bounceCounter: 1,
 		};
+		this.rotate = 0;
 		this.game = game;
-
 		this.image = {};
 		this.image.tank = new Image();
 		this.image.canon = new Image();
@@ -31,5 +31,24 @@ export default class Tank {
 	}
 	moveDown() {
 		this.tank.y += this.tank.speed;
+	}
+
+	draw(ctx) {
+		ctx.drawImage(this.image.tank, this.tank.x, this.tank.y);
+		this.drawCanon(ctx);
+	}
+
+	drawCanon(ctx) {
+		ctx.save();
+		//Rotation Point
+		ctx.translate(this.tank.x + this.tank.width / 2, this.tank.y + 35);
+		ctx.rotate(this.rotate);
+		//Drawing the canon on our translated ctx
+		ctx.drawImage(this.image.canon, -this.tank.width / 2, -35);
+		ctx.restore();
+	}
+
+	update(deltaTime) {
+		if (!deltaTime) return;
 	}
 }

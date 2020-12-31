@@ -5,7 +5,6 @@ export default class Player extends Tank {
 	constructor(game) {
 		super(game);
 		this.mousePosition = { x: 0, y: 0 };
-		this.rotate = 0;
 		this.keyMap = [false, false, false, false];
 		this.image.tank.src = "/assets/playerTank_body.png";
 		this.image.canon.src = "/assets/playerTank_head.png";
