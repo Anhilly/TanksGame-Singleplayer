@@ -22,11 +22,9 @@ export default class Game {
 
 	start() {
 		this.GAMESTATE = GAMESTATE.RUNNING;
-		this.player = new Player(this);
-		new InputHandler(this.player, this);
-		let blocks = buildLevel(this, level1);
-		this.gameObjects.push(this.player);
-		this.gameObjects.push(...blocks);
+		let components = buildLevel(this, level1);
+		this.gameObjects.push(...components);
+		console.log(components);
 	}
 
 	getGameObjects() {
