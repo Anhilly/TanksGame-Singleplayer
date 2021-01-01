@@ -34,7 +34,7 @@ export default class Bullet {
 
 	draw(ctx) {
 		ctx.save();
-		ctx.globalCompositeOperation = "destination-over";
+		//ctx.globalCompositeOperation = "destination-over";
 		ctx.lineWidth = 0.2;
 		ctx.beginPath();
 		ctx.arc(this.position.x, this.position.y + this.height / 2, 5, 0, Math.PI * 2);
@@ -147,9 +147,9 @@ export default class Bullet {
 		});
 	}
 
-	deleteObject(Object) {
+	deleteBlock() {
 		this.game.gameObjects = this.game.gameObjects.filter(
-			(obj) => !(obj instanceof Object && obj.position.x == this.position.x && obj.position.y == this.position.y)
+			(obj) => !(obj instanceof Bullet && obj.position.x == this.position.x && obj.position.y == this.position.y)
 		);
 	}
 
@@ -157,7 +157,7 @@ export default class Bullet {
 		if (!deltaTime) return;
 
 		if (this.bounceCounter < 0) {
-			this.deleteObject(Bullet);
+			this.deleteBlock();
 		}
 
 		if (this.position.x >= this.game.gameWidth + this.width || this.position.y >= this.game.gameHeight + this.height) {
