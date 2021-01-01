@@ -147,9 +147,9 @@ export default class Bullet {
 		});
 	}
 
-	deleteBlock() {
+	deleteObject(ClassName) {
 		this.game.gameObjects = this.game.gameObjects.filter(
-			(obj) => !(obj instanceof Bullet && obj.position.x == this.position.x && obj.position.y == this.position.y)
+			(obj) => !(obj instanceof ClassName && obj.position.x == this.position.x && obj.position.y == this.position.y)
 		);
 	}
 
@@ -157,7 +157,7 @@ export default class Bullet {
 		if (!deltaTime) return;
 
 		if (this.bounceCounter < 0) {
-			this.deleteBlock();
+			this.deleteObject(Bullet);
 		}
 
 		if (this.position.x >= this.game.gameWidth + this.width || this.position.y >= this.game.gameHeight + this.height) {
