@@ -70,7 +70,7 @@ export default class Bullet {
 			//Hit left block
 			this.position.x + this.speed >= element.position.x &&
 			this.position.x <= element.position.x &&
-			this.position.y + this.speed >= element.position.y &&
+			this.position.y >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
 			this.vx = -this.vx;
@@ -80,7 +80,7 @@ export default class Bullet {
 			//Hit right block
 			this.position.x + this.speed >= element.position.x + element.width &&
 			this.position.x <= element.position.x + element.width &&
-			this.position.y + this.speed >= element.position.y &&
+			this.position.y >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
 			this.collisionTank(element);
