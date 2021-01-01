@@ -34,7 +34,7 @@ export default class Bullet {
 
 	draw(ctx) {
 		ctx.save();
-		//ctx.globalCompositeOperation = "destination-over";
+		ctx.globalCompositeOperation = "destination-over";
 		ctx.lineWidth = 0.2;
 		ctx.beginPath();
 		ctx.arc(this.position.x, this.position.y + this.height / 2, 5, 0, Math.PI * 2);
@@ -83,9 +83,18 @@ export default class Bullet {
 			this.position.y + this.speed >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
+			this.collisionTank(element);
 			this.vx = -this.vx;
 			this.bounceCounter--;
 			console.log("rechts block");
+		}
+	}
+
+	collisionTank(element) {
+		if (element instanceof Player) {
+			this.deleteObject(Player);
+		} else if (element instanceof NotMovingTank) {
+			this.deleteObject(NotMovingTank);
 		}
 	}
 
@@ -105,7 +114,14 @@ export default class Bullet {
 
 	deleteObject(ClassName) {
 		this.game.gameObjects = this.game.gameObjects.filter(
-			(obj) => !(obj instanceof ClassName && obj.position.x == this.position.x && obj.position.y == this.position.y)
+			(obj) =>
+				!(
+					obj instanceof ClassName &&
+					this.position.x >= obj.position.x &&
+					this.position.x <= obj.position.x + obj.width &&
+					this.position.y >= obj.position.y &&
+					this.position.y <= obj.position.y + obj.height
+				)
 		);
 	}
 
