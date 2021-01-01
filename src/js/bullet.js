@@ -53,9 +53,9 @@ export default class Bullet {
 			this.position.y + this.speed >= element.position.y &&
 			this.position.y <= element.position.y
 		) {
+			this.collisionTank(element);
 			this.vy = -this.vy;
 			this.bounceCounter--;
-			console.log("hit oben block");
 		} else if (
 			//Hit unten block
 			this.position.x >= element.position.x &&
@@ -63,9 +63,9 @@ export default class Bullet {
 			this.position.y + this.speed >= element.position.y + element.height &&
 			this.position.y <= element.position.y + element.height
 		) {
+			this.collisionTank(element);
 			this.vy = -this.vy;
 			this.bounceCounter--;
-			console.log("hit unten block");
 		} else if (
 			//Hit left block
 			this.position.x + this.speed >= element.position.x &&
@@ -73,9 +73,9 @@ export default class Bullet {
 			this.position.y >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
+			this.collisionTank(element);
 			this.vx = -this.vx;
 			this.bounceCounter--;
-			console.log("Links block");
 		} else if (
 			//Hit right block
 			this.position.x + this.speed >= element.position.x + element.width &&
@@ -86,27 +86,35 @@ export default class Bullet {
 			this.collisionTank(element);
 			this.vx = -this.vx;
 			this.bounceCounter--;
-			console.log("rechts block");
 		}
 	}
 
 	collisionTank(element) {
-		if (element instanceof Player) {
-			this.deleteObject(Player);
-		} else if (element instanceof NotMovingTank) {
-			this.deleteObject(NotMovingTank);
+		if (element instanceof NotMovingTank || element instanceof Player) {
+			element.setDestroyed(1);
+			this.deleteObject(Bullet);
+			return true;
 		}
+		return false;
 	}
 
 	collisionDetection() {
 		this.game.gameObjects.forEach((element) => {
 			if (element instanceof Block) {
 				//Calculates distance to elimate most blocks
-				if (Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2)) >= 100) {
+				if (
+					Math.sqrt(
+						Math.pow(this.position.x - element.position.x, 2) +
+							Math.pow(this.position.y - element.position.y, 2)
+					) >= 100
+				) {
 					return;
 				}
 				this.collisionDetectionElement(element);
-			} else if ((element instanceof Player || element instanceof NotMovingTank) && element != this.tank) {
+			} else if (
+				(element instanceof Player || element instanceof NotMovingTank) &&
+				element != this.tank
+			) {
 				this.collisionDetectionElement(element);
 			}
 		});
@@ -132,7 +140,10 @@ export default class Bullet {
 			this.deleteObject(Bullet);
 		}
 
-		if (this.position.x >= this.game.gameWidth + this.width || this.position.y >= this.game.gameHeight + this.height) {
+		if (
+			this.position.x >= this.game.gameWidth + this.width ||
+			this.position.y >= this.game.gameHeight + this.height
+		) {
 			return;
 		}
 
