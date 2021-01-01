@@ -88,50 +88,6 @@ export default class Bullet {
 			console.log("rechts block");
 		}
 	}
-	/*
-	collisionDetectionTank(element) {
-		if (
-			//Hit oben block
-			this.position.x >= element.tank.x &&
-			this.position.x <= element.tank.x + element.tank.height &&
-			this.position.y + this.speed >= element.tank.y &&
-			this.position.y <= element.tank.y
-		) {
-			this.vy = -this.vy;
-			this.bounceCounter--;
-			console.log("boom");
-		} else if (
-			//Hit unten block
-			this.position.x >= element.tank.x &&
-			this.position.x <= element.tank.x + element.tank.height &&
-			this.position.y + this.speed >= element.tank.y + element.tank.height &&
-			this.position.y <= element.tank.y + element.tank.height
-		) {
-			this.vy = -this.vy;
-			this.bounceCounter--;
-			console.log("boom");
-		} else if (
-			//Hit left block
-			this.position.x + this.speed >= element.tank.x &&
-			this.position.x <= element.tank.x &&
-			this.position.y + this.speed >= element.tank.y &&
-			this.position.y <= element.tank.y + element.tank.height
-		) {
-			this.vx = -this.vx;
-			this.bounceCounter--;
-			console.log("boom");
-		} else if (
-			//Hit right block
-			this.position.x + this.speed >= element.tank.x + element.tank.height &&
-			this.position.x <= element.tank.x + element.tank.height &&
-			this.position.y + this.speed >= element.tank.y &&
-			this.position.y <= element.tank.y + element.tank.height
-		) {
-			this.vx = -this.vx;
-			this.bounceCounter--;
-			console.log("boom");
-		}
-	} */
 
 	collisionDetection() {
 		this.game.gameObjects.forEach((element) => {
