@@ -54,15 +54,15 @@ function calculatePosition(mapIndex, rowIndex) {
 
 function generateNotMovingTank(game, position) {
 	let tank = new NotMovingTank(game);
-	tank.tank.x = position.x;
-	tank.tank.y = position.y;
+	tank.position.x = position.x;
+	tank.position.y = position.y;
 	return tank;
 }
 
 function generatePlayer(game, position) {
 	let player = new Player(game);
-	player.tank.x = position.x;
-	player.tank.y = position.y;
+	player.position.x = position.x;
+	player.position.y = position.y;
 	new InputHandler(player, game);
 	return player;
 }

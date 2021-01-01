@@ -5,46 +5,47 @@ const TEAM = {
 
 export default class Tank {
 	constructor(game) {
-		this.tank = {
-			width: 40,
-			height: 61,
+		this.game = game;
+		this.position = {
 			x: game.gameWidth / 5,
 			y: game.gameHeight / 2,
-			speed: 1,
-			bounceCounter: 1,
 		};
+		this.width = 40;
+		this.height = 61;
+		this.speed = 1;
+		this.bounceCounter = 1;
 		this.rotate = 0;
-		this.game = game;
+		//Image
 		this.image = {};
 		this.image.tank = new Image();
 		this.image.canon = new Image();
 	}
 
 	moveUp() {
-		this.tank.y -= this.tank.speed;
+		this.position.y -= this.speed;
 	}
 	moveLeft() {
-		this.tank.x -= this.tank.speed;
+		this.position.x -= this.speed;
 	}
 	moveRight() {
-		this.tank.x += this.tank.speed;
+		this.position.x += this.speed;
 	}
 	moveDown() {
-		this.tank.y += this.tank.speed;
+		this.position.y += this.speed;
 	}
 
 	draw(ctx) {
-		ctx.drawImage(this.image.tank, this.tank.x, this.tank.y);
+		ctx.drawImage(this.image.tank, this.position.x, this.position.y);
 		this.drawCanon(ctx);
 	}
 
 	drawCanon(ctx) {
 		ctx.save();
 		//Rotation Point
-		ctx.translate(this.tank.x + this.tank.width / 2, this.tank.y + 35);
+		ctx.translate(this.position.x + this.width / 2, this.position.y + 35);
 		ctx.rotate(this.rotate);
 		//Drawing the canon on our translated ctx
-		ctx.drawImage(this.image.canon, -this.tank.width / 2, -35);
+		ctx.drawImage(this.image.canon, -this.width / 2, -35);
 		ctx.restore();
 	}
 

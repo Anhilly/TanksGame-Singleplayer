@@ -68,8 +68,8 @@ export default class Player extends Tank {
 
 	rotateTank() {
 		//Sucht uns die mitte von unserem Panzer
-		let offsetX = this.tank.x + this.tank.width / 2;
-		let offsetY = this.tank.y + this.tank.height / 2;
+		let offsetX = this.position.x + this.width / 2;
+		let offsetY = this.position.y + this.height / 2;
 		this.rotate = Math.atan2(this.mousePosition.x - offsetX, -(this.mousePosition.y - offsetY));
 	}
 
@@ -80,17 +80,17 @@ export default class Player extends Tank {
 
 	draw(ctx) {
 		//Drawing Tank
-		ctx.drawImage(this.image.tank, this.tank.x, this.tank.y);
+		ctx.drawImage(this.image.tank, this.position.x, this.position.y);
 		this.drawCanon(ctx);
 	}
 
 	drawCanon(ctx) {
 		ctx.save();
 		//Rotation Point
-		ctx.translate(this.tank.x + this.tank.width / 2, this.tank.y + 35);
+		ctx.translate(this.position.x + this.width / 2, this.position.y + 35);
 		ctx.rotate(this.rotate);
 		//Drawing the canon on our translated ctx
-		ctx.drawImage(this.image.canon, -this.tank.width / 2, -35);
+		ctx.drawImage(this.image.canon, -this.width / 2, -35);
 		ctx.restore();
 	}
 

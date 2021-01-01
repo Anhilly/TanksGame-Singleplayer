@@ -11,11 +11,11 @@ export default class Bullet {
 		this.width = 8;
 		this.height = 8;
 		this.speed = 4;
-		this.bounceCounter = this.tank.tank.bounceCounter;
+		this.bounceCounter = this.tank.bounceCounter;
 		//Position
 		this.position = {
-			x: this.tank.tank.x + this.tank.tank.width / 2,
-			y: this.tank.tank.y + this.tank.tank.height / 2,
+			x: this.tank.position.x + this.tank.width / 2,
+			y: this.tank.position.y + this.tank.height / 2,
 		};
 
 		//Image
@@ -45,7 +45,7 @@ export default class Bullet {
 		ctx.restore();
 	}
 
-	collisionDetectionBlock(element) {
+	collisionDetectionElement(element) {
 		if (
 			//Hit oben block
 			this.position.x >= element.position.x &&
@@ -88,7 +88,7 @@ export default class Bullet {
 			console.log("rechts block");
 		}
 	}
-
+	/*
 	collisionDetectionTank(element) {
 		if (
 			//Hit oben block
@@ -131,7 +131,7 @@ export default class Bullet {
 			this.bounceCounter--;
 			console.log("boom");
 		}
-	}
+	} */
 
 	collisionDetection() {
 		this.game.gameObjects.forEach((element) => {
@@ -140,9 +140,9 @@ export default class Bullet {
 				if (Math.sqrt(Math.pow(this.position.x - element.position.x, 2) + Math.pow(this.position.y - element.position.y, 2)) >= 100) {
 					return;
 				}
-				this.collisionDetectionBlock(element);
+				this.collisionDetectionElement(element);
 			} else if ((element instanceof Player || element instanceof NotMovingTank) && element != this.tank) {
-				this.collisionDetectionTank(element);
+				this.collisionDetectionElement(element);
 			}
 		});
 	}
