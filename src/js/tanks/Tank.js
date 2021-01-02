@@ -46,6 +46,15 @@ export default class Tank {
 			(obj) => !(this.position.x == obj.position.x && this.position.y == obj.position.y)
 		);
 	}
+	/*
+	canMove(position) {
+		if (up) {
+			if(this.position)
+		} else if (left) {
+		} else if (right) {
+		} else if (down) {
+		}
+	} */
 
 	//Sets the this.destroyed value
 	setDestroyed(value) {
@@ -63,6 +72,7 @@ export default class Tank {
 			this.drawCanon(ctx);
 		}
 	}
+
 	//Draws the explosion
 	drawExplosion(ctx) {
 		if (this.explosionFrameX <= 12) this.explosionFrameX += 0.2;

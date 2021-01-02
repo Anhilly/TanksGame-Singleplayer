@@ -44,6 +44,17 @@ export function buildLevel(game, level) {
 	return components;
 }
 
+export function getCloseObjects(game, object) {
+	let closeObject = game.gameObjects.filter(
+		(component) =>
+			Math.sqrt(
+				Math.pow(element.position.x - component.position.x, 2) +
+					Math.pow(element.position.y - component.position.y, 2)
+			) >= 100
+	);
+	return closeObject;
+}
+
 function calculatePosition(mapIndex, rowIndex) {
 	let position = {
 		x: 40 * mapIndex,
