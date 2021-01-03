@@ -44,16 +44,18 @@ export function buildLevel(game, level) {
 	return components;
 }
 
+/*
+//Returns a Array with all objects close to our current object
 export function getCloseObjects(game, object) {
 	let closeObject = game.gameObjects.filter(
 		(component) =>
 			Math.sqrt(
 				Math.pow(element.position.x - component.position.x, 2) +
 					Math.pow(element.position.y - component.position.y, 2)
-			) >= 100
+			) >= 100 && object != component
 	);
 	return closeObject;
-}
+} */
 
 function calculatePosition(mapIndex, rowIndex) {
 	let position = {

@@ -2,7 +2,7 @@ const TEAM = {
 	PLAYER: 0,
 	EVIL: 1,
 };
-
+//import getCloseObjects from "/src/js/levels.js";
 export default class Tank {
 	constructor(game) {
 		this.game = game;
@@ -29,7 +29,9 @@ export default class Tank {
 	}
 
 	moveUp() {
-		this.position.y -= this.speed;
+		if (this.canMove("up")) {
+			this.position.y -= this.speed;
+		}
 	}
 	moveLeft() {
 		this.position.x -= this.speed;
@@ -46,15 +48,65 @@ export default class Tank {
 			(obj) => !(this.position.x == obj.position.x && this.position.y == obj.position.y)
 		);
 	}
-	/*
+	//Returns a Array with all objects close to our current object
+	getCloseObjects(game, object) {
+		let closeObject = game.gameObjects.filter(
+			(component) =>
+				Math.sqrt(
+					Math.pow(component.position.x - this.position.x, 2) +
+						Math.pow(component.position.y - this.position.y, 2)
+				) >= 0.8
+		);
+		return closeObject;
+	}
+
 	canMove(position) {
-		if (up) {
-			if(this.position)
-		} else if (left) {
-		} else if (right) {
-		} else if (down) {
+		let closeObject = this.getCloseObjects(this.game, this);
+		if (position == "right") {
+			for (let i = 0; i < closeObject.length; i++) {
+				if (
+					this.position.x + this.speed >= closeObject[i].position.x &&
+					this.position.x + this.speed <= closeObject[i].position.x + closeObject[i].width
+				) {
+					return false;
+				}
+			}
+		} else if (position == "left") {
+			for (let i = 0; i < closeObject.length; i++) {
+				if (
+					this.position.x - this.speed >= closeObject[i].position.x &&
+					this.position.x - this.speed <= closeObject[i].position.x + closeObject[i].width
+				) {
+					return false;
+				}
+			}
+		} else if (position === "up") {
+			console.log("bruh was: ", closeObject.length);
+			for (let i = 0; i < closeObject.length; i++) {
+				console.log(closeObject[i]);
+
+				if (
+					this.position.x >= closeObject[i].position.x &&
+					this.position.x <= closeObject[i].position.x + closeObject[i].width &&
+					this.position.y >= closeObject[i].position.y &&
+					this.position.y <= closeObject[i].position.y + closeObject[i].height
+				) {
+					return false;
+				}
+			}
+		} else if (position == "down") {
+			for (let i = 0; i < closeObject.length; i++) {
+				if (
+					this.position.y + this.speed >= closeObject[i].position.y &&
+					this.position.y + this.speed <=
+						closeObject[i].position.y + closeObject[i].height
+				) {
+					return false;
+				}
+			}
 		}
-	} */
+		return true;
+	}
 
 	//Sets the this.destroyed value
 	setDestroyed(value) {
