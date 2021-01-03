@@ -92,7 +92,7 @@ export default class Player extends Tank {
 	drawCanon(ctx) {
 		ctx.save();
 		//Rotation Point
-		ctx.translate(this.position.x + this.width / 2, this.position.y + 35);
+		ctx.translate(this.position.x + this.width / 2, this.position.y + this.height / 2);
 		ctx.rotate(this.rotate);
 		//Drawing the canon on our translated ctx
 		ctx.drawImage(this.image.canon, -this.width / 2, -35);

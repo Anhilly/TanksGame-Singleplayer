@@ -11,7 +11,7 @@ export default class Tank {
 			y: game.gameHeight / 2,
 		};
 		this.width = 40;
-		this.height = 61;
+		this.height = 50;
 		this.speed = 1;
 		this.bounceCounter = 1;
 		this.rotate = 0;
@@ -29,18 +29,16 @@ export default class Tank {
 	}
 
 	moveUp() {
-		if (this.canMove("up")) {
-			this.position.y -= this.speed;
-		}
+		if (this.canMove("up")) this.position.y -= this.speed;
 	}
 	moveLeft() {
-		this.position.x -= this.speed;
+		if (this.canMove("left")) this.position.x -= this.speed;
 	}
 	moveRight() {
-		this.position.x += this.speed;
+		if (this.canMove("right")) this.position.x += this.speed;
 	}
 	moveDown() {
-		this.position.y += this.speed;
+		if (this.canMove("down")) this.position.y += this.speed;
 	}
 
 	deleteTank() {
@@ -55,7 +53,7 @@ export default class Tank {
 				Math.sqrt(
 					Math.pow(component.position.x - this.position.x, 2) +
 						Math.pow(component.position.y - this.position.y, 2)
-				) >= 0.8
+				) <= 100 && this != component
 		);
 		return closeObject;
 	}
@@ -65,8 +63,11 @@ export default class Tank {
 		if (position == "right") {
 			for (let i = 0; i < closeObject.length; i++) {
 				if (
-					this.position.x + this.speed >= closeObject[i].position.x &&
-					this.position.x + this.speed <= closeObject[i].position.x + closeObject[i].width
+					this.position.x + this.speed <
+						closeObject[i].position.x + closeObject[i].width &&
+					this.position.x + this.width + this.speed > closeObject[i].position.x &&
+					this.position.y < closeObject[i].position.y + closeObject[i].height &&
+					this.position.y + this.height > closeObject[i].position.y
 				) {
 					return false;
 				}
@@ -74,22 +75,23 @@ export default class Tank {
 		} else if (position == "left") {
 			for (let i = 0; i < closeObject.length; i++) {
 				if (
-					this.position.x - this.speed >= closeObject[i].position.x &&
-					this.position.x - this.speed <= closeObject[i].position.x + closeObject[i].width
+					this.position.x - this.speed <
+						closeObject[i].position.x + closeObject[i].width &&
+					this.position.x + this.width - this.speed > closeObject[i].position.x &&
+					this.position.y < closeObject[i].position.y + closeObject[i].height &&
+					this.position.y + this.height > closeObject[i].position.y
 				) {
 					return false;
 				}
 			}
 		} else if (position === "up") {
-			console.log("bruh was: ", closeObject.length);
 			for (let i = 0; i < closeObject.length; i++) {
-				console.log(closeObject[i]);
-
 				if (
-					this.position.x >= closeObject[i].position.x &&
-					this.position.x <= closeObject[i].position.x + closeObject[i].width &&
-					this.position.y >= closeObject[i].position.y &&
-					this.position.y <= closeObject[i].position.y + closeObject[i].height
+					this.position.x < closeObject[i].position.x + closeObject[i].width &&
+					this.position.x + this.width > closeObject[i].position.x &&
+					this.position.y - this.speed <
+						closeObject[i].position.y + closeObject[i].height &&
+					this.position.y + this.height > closeObject[i].position.y
 				) {
 					return false;
 				}
@@ -97,9 +99,10 @@ export default class Tank {
 		} else if (position == "down") {
 			for (let i = 0; i < closeObject.length; i++) {
 				if (
-					this.position.y + this.speed >= closeObject[i].position.y &&
-					this.position.y + this.speed <=
-						closeObject[i].position.y + closeObject[i].height
+					this.position.x < closeObject[i].position.x + closeObject[i].width &&
+					this.position.x + this.width > closeObject[i].position.x &&
+					this.position.y < closeObject[i].position.y + closeObject[i].height &&
+					this.position.y + this.height + this.speed > closeObject[i].position.y
 				) {
 					return false;
 				}
