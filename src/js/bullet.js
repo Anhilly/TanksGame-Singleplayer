@@ -30,6 +30,10 @@ export default class Bullet {
 		//Normierte Vektoren
 		this.vx = this.dx / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
 		this.vy = this.dy / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
+
+		//Not very clean ...
+		this.position.x = this.position.x - this.vx * 35;
+		this.position.y = this.position.y - this.vy * 35;
 	}
 
 	draw(ctx) {
@@ -37,7 +41,7 @@ export default class Bullet {
 		ctx.globalCompositeOperation = "destination-over";
 		ctx.lineWidth = 0.2;
 		ctx.beginPath();
-		ctx.arc(this.position.x, this.position.y + this.height / 2, 5, 0, Math.PI * 2);
+		ctx.arc(this.position.x, this.position.y, 5, 0, Math.PI * 2);
 		ctx.fillStyle = "red";
 		ctx.stroke();
 		ctx.fill();
