@@ -1,3 +1,5 @@
+import Player from "/src/js/tanks/Player.js";
+
 const TEAM = {
 	PLAYER: 0,
 	EVIL: 1,
@@ -56,6 +58,11 @@ export default class Tank {
 				) <= 100 && this != component
 		);
 		return closeObject;
+	}
+
+	findPlayer() {
+		let player = this.game.gameObjects.find((obj) => obj instanceof Player);
+		return player;
 	}
 
 	//Gets the target position sets the rotations number
@@ -122,6 +129,15 @@ export default class Tank {
 	//Sets the this.destroyed value
 	setDestroyed(value) {
 		this.destroyed = value;
+	}
+
+	aimCanon() {
+		let player = this.findPlayer();
+		let aimPosition = {
+			x: player.position.x + this.width / 2,
+			y: player.position.y + this.height / 2,
+		};
+		this.rotateCanonTo(aimPosition);
 	}
 
 	draw(ctx) {
