@@ -4,7 +4,6 @@ const TEAM = {
 	PLAYER: 0,
 	EVIL: 1,
 };
-//import getCloseObjects from "/src/js/levels.js";
 export default class Tank {
 	constructor(game) {
 		this.game = game;
@@ -133,6 +132,7 @@ export default class Tank {
 
 	aimCanon() {
 		let player = this.findPlayer();
+		if (player == null) return;
 		let aimPosition = {
 			x: player.position.x + this.width / 2,
 			y: player.position.y + this.height / 2,
