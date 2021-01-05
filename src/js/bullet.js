@@ -111,10 +111,7 @@ export default class Bullet {
 					return;
 				}
 				this.collisionDetectionElement(element);
-			} else if (
-				(element instanceof Player || element instanceof NotMovingTank) &&
-				element != this.tank
-			) {
+			} else if (element instanceof Player || element instanceof NotMovingTank) {
 				this.collisionDetectionElement(element);
 			}
 		});

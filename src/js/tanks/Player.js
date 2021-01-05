@@ -83,12 +83,6 @@ export default class Player extends Tank {
 		this.mousePosition.y = mousePosition.y;
 	}
 
-	draw(ctx) {
-		//Drawing Tank
-		ctx.drawImage(this.image.tank, this.position.x, this.position.y);
-		this.drawCanon(ctx);
-	}
-
 	drawCanon(ctx) {
 		ctx.save();
 		//Rotation Point
