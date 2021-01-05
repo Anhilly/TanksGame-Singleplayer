@@ -58,6 +58,14 @@ export default class Tank {
 		return closeObject;
 	}
 
+	//Gets the target position sets the rotations number
+	rotateCanonTo(target) {
+		//Sucht uns die mitte von unserem Panzer
+		let offsetX = this.position.x + this.width / 2;
+		let offsetY = this.position.y + this.height / 2;
+		this.rotate = Math.atan2(target.x - offsetX, -(target.y - offsetY));
+	}
+
 	canMove(position) {
 		let closeObject = this.getCloseObjects(this.game, this);
 		if (position == "right") {
