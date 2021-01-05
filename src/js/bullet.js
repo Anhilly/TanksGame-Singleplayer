@@ -32,8 +32,8 @@ export default class Bullet {
 		this.vy = this.dy / Math.sqrt(Math.pow(this.dx, 2) + Math.pow(this.dy, 2));
 
 		//Not very clean ...
-		this.position.x = this.position.x - this.vx * 35;
-		this.position.y = this.position.y - this.vy * 35;
+		this.position.x = this.position.x - this.vx * 38;
+		this.position.y = this.position.y - this.vy * 38;
 	}
 
 	draw(ctx) {
