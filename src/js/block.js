@@ -18,7 +18,6 @@ export default class Block {
 
 	draw(ctx) {
 		ctx.strokeStyle = "#827756";
-
 		ctx.drawImage(this.image.block, this.position.x, this.position.y);
 	}
 

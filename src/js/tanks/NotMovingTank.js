@@ -10,6 +10,7 @@ export default class NotMovingTank extends Tank {
 		this.image.canon.src = "/assets/EnemyTank_NotMovingTank_canon.png";
 		this.exeTime = 0;
 	}
+
 	shoot() {
 		let player = this.findPlayer();
 		if (player == null) return;

@@ -1,13 +1,7 @@
 export default class InputHandler {
 	constructor(player, game) {
 		let lastInput = "";
-		/*
-		document.addEventListener("keydown", (event) => {
-			if (event.key == "w" || event.key == "a" || event.key == "s" || event.key == "d") {
-				player.move(event.key, lastInput);
-				lastInput = event.key;
-			}
-        }); */
+
 		let keyMap = [false, false, false, false];
 		document.addEventListener("keydown", (event) => {
 			switch (event.key) {
