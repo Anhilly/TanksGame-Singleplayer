@@ -34,6 +34,9 @@ export default class Bullet {
 		//Not very clean ...
 		this.position.x = this.position.x - this.vx * 38;
 		this.position.y = this.position.y - this.vy * 38;
+
+		//Audio
+		this.wallBounceAudio = new Audio("/assets/sounds/WallBounceBullet.wav");
 	}
 
 	draw(ctx) {
@@ -57,9 +60,10 @@ export default class Bullet {
 			this.position.y + this.speed >= element.position.y &&
 			this.position.y <= element.position.y
 		) {
-			this.collisionTank(element);
+			if (this.collisionTank(element)) return;
 			this.vy = -this.vy;
 			this.bounceCounter--;
+			this.playWallBounceAudio();
 		} else if (
 			//Hit unten block
 			this.position.x >= element.position.x &&
@@ -67,9 +71,10 @@ export default class Bullet {
 			this.position.y + this.speed >= element.position.y + element.height &&
 			this.position.y <= element.position.y + element.height
 		) {
-			this.collisionTank(element);
+			if (this.collisionTank(element)) return;
 			this.vy = -this.vy;
 			this.bounceCounter--;
+			this.playWallBounceAudio();
 		} else if (
 			//Hit left block
 			this.position.x + this.speed >= element.position.x &&
@@ -77,9 +82,10 @@ export default class Bullet {
 			this.position.y >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
-			this.collisionTank(element);
+			if (this.collisionTank(element)) return;
 			this.vx = -this.vx;
 			this.bounceCounter--;
+			this.playWallBounceAudio();
 		} else if (
 			//Hit right block
 			this.position.x + this.speed >= element.position.x + element.width &&
@@ -87,10 +93,16 @@ export default class Bullet {
 			this.position.y >= element.position.y &&
 			this.position.y <= element.position.y + element.width
 		) {
-			this.collisionTank(element);
+			if (this.collisionTank(element)) return;
 			this.vx = -this.vx;
 			this.bounceCounter--;
+			this.playWallBounceAudio();
 		}
+	}
+
+	playWallBounceAudio() {
+		this.wallBounceAudio.play();
+		this.wallBounceAudio.currentTime = 0;
 	}
 
 	collisionTank(element) {
