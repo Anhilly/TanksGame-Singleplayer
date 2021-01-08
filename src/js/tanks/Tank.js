@@ -27,6 +27,9 @@ export default class Tank {
 		this.explosionFrameX = 0;
 		this.explosionWidth = 96;
 		this.explosionHeight = 96;
+
+		//Audio
+		this.explosionAudio = new Audio("/assets/sounds/explosion.wav");
 	}
 
 	moveUp() {
@@ -57,6 +60,11 @@ export default class Tank {
 				) <= 100 && this != component
 		);
 		return closeObject;
+	}
+
+	playExplosionAudio() {
+		this.explosionAudio.play();
+		this.explosionAudio.currentTime = 0;
 	}
 
 	findPlayer() {
@@ -128,6 +136,9 @@ export default class Tank {
 	//Sets the this.destroyed value
 	setDestroyed(value) {
 		this.destroyed = value;
+		if (value == 1) {
+			this.playExplosionAudio();
+		}
 	}
 
 	aimCanon() {

@@ -24,7 +24,6 @@ export default class Game {
 		this.GAMESTATE = GAMESTATE.RUNNING;
 		let components = buildLevel(this, level1);
 		this.gameObjects.push(...components);
-		console.log(components);
 	}
 
 	getGameObjects() {
