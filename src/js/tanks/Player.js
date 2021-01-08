@@ -83,6 +83,24 @@ export default class Player extends Tank {
 		this.mousePosition.y = mousePosition.y;
 	}
 
+	//Draws the explosion
+	drawExplosion(ctx) {
+		if (this.explosionFrameX <= 12) this.explosionFrameX += 0.2;
+		ctx.drawImage(
+			this.image.explosion,
+			this.explosionWidth * Math.floor(this.explosionFrameX),
+			0,
+			this.explosionWidth,
+			this.explosionHeight,
+			this.position.x - 15,
+			this.position.y - 25,
+			this.width * 1.8,
+			this.height * 1.8
+		);
+		//Sets game to gameover
+		this.game.setGameState(3);
+	}
+
 	drawCanon(ctx) {
 		ctx.save();
 		//Rotation Point

@@ -16,12 +16,19 @@ export default class Game {
 	constructor(gameHeight, gameWidth) {
 		this.gameHeight = gameHeight;
 		this.gameWidth = gameWidth;
-		this.GAMESTATE = GAMESTATE;
 		this.gameObjects = [];
+		this.gameState = GAMESTATE;
+	}
+	getGameState() {
+		return this.GAMESTATE;
+	}
+
+	setGameState(value) {
+		this.gameState = value;
 	}
 
 	start() {
-		this.GAMESTATE = GAMESTATE.RUNNING;
+		this.gameState = GAMESTATE.RUNNING;
 		let components = buildLevel(this, level1);
 		this.gameObjects.push(...components);
 	}
@@ -36,10 +43,25 @@ export default class Game {
 
 	//Draws all objects
 	draw(ctx) {
-		this.gameObjects.forEach((object) => object.draw(ctx));
+		if (this.gameState === GAMESTATE.RUNNING)
+			this.gameObjects.forEach((object) => object.draw(ctx));
+		if (this.gameState === GAMESTATE.GAMEOVER) this.drawGameOverScreen(ctx);
+	}
+
+	//Draws the GameOver Screen
+	drawGameOverScreen(ctx) {
+		//Background
+		ctx.rect(this.gameWidth, this.gameHeight, 0, 0);
+		//Text
+		ctx.font = "75px Arial";
+		ctx.fillStyle = "white";
+		ctx.textAlign = "center";
+		ctx.fillText("Game Over!", this.gameWidth / 2, this.gameHeight / 2);
 	}
 
 	update(deltaTime) {
-		this.gameObjects.forEach((object) => object.update(deltaTime));
+		if (this.gameState === GAMESTATE.RUNNING)
+			this.gameObjects.forEach((object) => object.update(deltaTime));
+		if (this.gameState === GAMESTATE.GAMEOVER) return;
 	}
 }
