@@ -1,13 +1,13 @@
-import Tank from "/src/js/tanks/Tank.js";
-import Bullet from "/src/js/bullet.js";
+import Tank from "/app/src/js/tanks/Tank.js";
+import Bullet from "/app/src/js/bullet.js";
 
 export default class Player extends Tank {
 	constructor(game) {
 		super(game);
 		this.mousePosition = { x: 0, y: 0 };
 		this.keyMap = [false, false, false, false];
-		this.image.tank.src = "/assets/playerTank_body.png";
-		this.image.canon.src = "/assets/playerTank_head.png";
+		this.image.tank.src = "/app/assets/playerTank_body.png";
+		this.image.canon.src = "/app/assets/playerTank_head.png";
 	}
 
 	setKeyMap(keyMap) {

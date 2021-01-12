@@ -13,7 +13,7 @@ export default class Block {
 
 		this.image = {};
 		this.image.block = new Image();
-		this.image.block.src = "/assets/block.png";
+		this.image.block.src = "/app/assets/block.png";
 	}
 
 	draw(ctx) {
