@@ -1,13 +1,13 @@
-import Tank from "/app/src/js/tanks/Tank.js";
-import Bullet from "/app/src/js/bullet.js";
+import Tank from "/src/js/tanks/Tank.js";
+import Bullet from "/src/js/bullet.js";
 
 //Worst tank in the Game can't even Move
 export default class NotMovingTank extends Tank {
 	constructor(game) {
 		super(game);
 		this.speed = 0;
-		this.image.tank.src = "/app/assets/EnemyTank_NotMovingTank_body.png";
-		this.image.canon.src = "/app/assets/EnemyTank_NotMovingTank_canon.png";
+		this.image.tank.src = "/assets/EnemyTank_NotMovingTank_body.png";
+		this.image.canon.src = "/assets/EnemyTank_NotMovingTank_canon.png";
 		this.exeTime = 0;
 	}
 

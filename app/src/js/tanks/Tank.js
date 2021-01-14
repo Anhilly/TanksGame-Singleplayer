@@ -1,4 +1,4 @@
-import Player from "/app/src/js/tanks/Player.js";
+import Player from "/src/js/tanks/Player.js";
 
 const TEAM = {
 	PLAYER: 0,
@@ -22,14 +22,14 @@ export default class Tank {
 		this.image.tank = new Image();
 		this.image.canon = new Image();
 		this.image.explosion = new Image();
-		this.image.explosion.src = "/app/assets/Explosion.png";
+		this.image.explosion.src = "/assets/Explosion.png";
 		//Spriteanimation
 		this.explosionFrameX = 0;
 		this.explosionWidth = 96;
 		this.explosionHeight = 96;
 
 		//Audio
-		this.explosionAudio = new Audio("/app/assets/sounds/explosion.wav");
+		this.explosionAudio = new Audio("/assets/sounds/explosion.wav");
 	}
 
 	moveUp() {

@@ -1,7 +1,7 @@
-import NotMovingTank from "/app/src/js/tanks/NotMovingTank.js";
-import Player from "/app/src/js/tanks/Player.js";
-import Block from "/app/src/js/block.js";
-import Tank from "/app/src/js/tanks/Tank.js";
+import NotMovingTank from "/src/js/tanks/NotMovingTank.js";
+import Player from "/src/js/tanks/Player.js";
+import Block from "/src/js/block.js";
+import Tank from "/src/js/tanks/Tank.js";
 
 export default class Bullet {
 	constructor(game, tank, mouse) {
@@ -21,7 +21,7 @@ export default class Bullet {
 		//Image
 		this.image = {};
 		this.image.bulletDefault = new Image();
-		this.image.bulletDefault.src = "/app/assets/defaultBullet.png";
+		this.image.bulletDefault.src = "/assets/defaultBullet.png";
 
 		//Calculations
 		this.dx = this.position.x - this.mouse.x;
@@ -36,7 +36,7 @@ export default class Bullet {
 		this.position.y = this.position.y - this.vy * 38;
 
 		//Audio
-		this.wallBounceAudio = new Audio("/app/assets/sounds/WallBounceBullet.wav");
+		this.wallBounceAudio = new Audio("/assets/sounds/WallBounceBullet.wav");
 	}
 
 	draw(ctx) {

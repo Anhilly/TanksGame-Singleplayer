@@ -1,9 +1,9 @@
 //Tanks
-import Player from "/app/src/js/tanks/Player.js";
-import NotMovingTank from "/app/src/js/tanks/NotMovingTank.js";
+import Player from "/src/js/tanks/Player.js";
+import NotMovingTank from "/src/js/tanks/NotMovingTank.js";
 
-import Block from "/app/src/js/block.js";
-import InputHandler from "/app/src/js/input.js";
+import Block from "/src/js/block.js";
+import InputHandler from "/src/js/input.js";
 
 //1 = Block, 2 = Player spawn, 3 = NotMovingTank, 4 = MovingTank
 export const level1 = [

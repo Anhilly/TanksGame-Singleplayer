@@ -1,9 +1,8 @@
 //import Tank from '/js/tanks/tank.js';
-import InputHandler from "/app/src/js/input.js";
-import Player from "/app/src/js/tanks/Player.js";
-import Block from "/app/src/js/block.js";
-import { buildLevel, level1 } from "/app/src/js/levels.js";
-import Bullet from "/app/src/js/bullet.js";
+import InputHandler from "/src/js/input.js";
+import Player from "/src/js/tanks/Player.js";
+import Block from "/src/js/block.js";
+import { buildLevel, level1 } from "/src/js/levels.js";
 
 const GAMESTATE = {
 	PAUSED: 0,
@@ -18,6 +17,7 @@ export default class Game {
 		this.gameWidth = gameWidth;
 		this.gameObjects = [];
 		this.gameState = GAMESTATE;
+		this.socket = io();
 	}
 	getGameState() {
 		return this.GAMESTATE;
